@@ -1,9 +1,6 @@
 import system.io 
-import tactic
 open io
 open list
-open prod
-open ordering
 
 def combinations : ℕ → list ℕ → list (list ℕ)
 | 0 l        := [[]]
