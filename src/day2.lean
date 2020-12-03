@@ -4,9 +4,7 @@ open io
 open nat
 open list
 open functor
-open applicative
 open decidable
-open classical
 
 structure entry :=
     (letter : char)
