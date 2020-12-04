@@ -1,5 +1,6 @@
 import system.io 
 import tactic
+import utils
 open io
 open nat
 open list
@@ -47,14 +48,7 @@ def valid_2 : entry → bool
 | (_, _) := false
 end
 
--- can't prove decidablity to use normal filter 
-def filter {α : Type } (p : α → bool) : list α → list α
-| []     := []
-| (a::l) := if p a then a :: filter l else filter l
-
-
-def num_valid (pred : entry → bool) : list entry → ℕ 
-| l := length $ filter pred l
+def num_valid (pred : entry → bool) : list entry → ℕ := length ∘ filter pred 
 
 def main : io unit := do
     contents ← fs.read_file "inputs/day2.txt",

@@ -20,3 +20,4 @@ def main : io unit := do
     let l : list ℕ := parse contents.to_string,
     put_str_ln $ to_string $ map productl (find_k_add 2 2020 l),
     put_str_ln $ to_string $ map productl (find_k_add 3 2020 l)
+

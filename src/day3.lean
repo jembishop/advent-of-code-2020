@@ -1,6 +1,7 @@
 import system.io 
 import data.vector
 import data.zmod.basic
+import utils
 open io
 open list
 
@@ -35,7 +36,7 @@ instance {n : ℕ} : has_to_string (zmod n) := ⟨λ x , to_string x.val⟩
 def is_tree : ℕ → tree_line → bool 
 | n tl  := let modW : zmod WIDTH := n in tl.nth modW 
 
-def enumerate_h {α} : ℕ → list α → list (prod ℕ α) 
+def enumerate_h {α} : ℕ → list α → list (ℕ × α)
 | n []  := []
 | n (x::xs)  := (n, x) :: (enumerate_h (n + 1) xs)
 
@@ -45,12 +46,7 @@ def enumerate {α} : list α → list (prod ℕ α)
 def position : ℕ → ℕ → ℕ 
 | grad y       := grad*y
 
--- can't prove decidablity to use normal filter 
-def filter {α : Type } (p : α → bool) : list α → list α
-| []     := []
-| (a::l) := if p a then a :: filter l else filter l
-
-def hits : prod ℕ ℕ → list tree_line → ℕ 
+def hits : ℕ × ℕ → list tree_line → ℕ 
 | (step, grad) tls   := length $ filter id $ map 
 (λt: prod ℕ tree_line, 
 is_tree (position grad (t.1/step)) t.2 ) 
@@ -58,7 +54,7 @@ is_tree (position grad (t.1/step)) t.2 )
 
 def productl : list ℕ → ℕ := list.foldr (*) 1
 
-def many_hits : list (prod ℕ ℕ) → list tree_line → ℕ 
+def many_hits : list (ℕ × ℕ) → list tree_line → ℕ 
 | hs tls := productl $ map (λ h, hits h tls) hs
 
 def main : io unit := do
