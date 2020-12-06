@@ -6,9 +6,6 @@ open io
 open list
 
 
-def from_list {α} {n : ℕ} : list α → option (vector α n) 
-| l     := if h: l.length = n then some ⟨l, h⟩ else none
-
 def tree_p : char → option bool 
 | '#' := some true
 | '.' := some false
