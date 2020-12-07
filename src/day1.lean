@@ -1,4 +1,5 @@
 import system.io 
+import utils
 open io
 open list
 
@@ -7,7 +8,6 @@ def combinations : ℕ → list ℕ → list (list ℕ)
 | n []       := []
 | n (x::xs)  := map (λ l, x::l) (combinations (n-1) xs) ++ (combinations n xs)
 
-def suml : list ℕ → ℕ := list.foldr (+) 0
 def productl : list ℕ → ℕ := list.foldr (*) 1
 
 def find_k_add :ℕ → ℕ → list ℕ → list (list ℕ)

@@ -18,24 +18,6 @@ def parse_field : string → option (string × string)
 def parse_passport : string → option passport 
 | s         :=  monad.sequence $ functor.map parse_field (filter (≠"") (s.split (λ x, x=' ' ∨ x='\n')))
 
-def split_l {α: Type} [decidable_eq α]: α → list α → list (list α )
-| delim [] := []
-| delim (x::xs) := let rest := split_l delim xs in
-    if x=delim then []::rest else 
-    match rest with 
-    | []      := [[x]]
-    | (y::ys) := (x::y)::ys
-    end
-
-def split_lines : string → list string
-| s  := s.split (='\n')
-
-def join_str : list string → string
-| []    := ""
-| (x::xs) := x ++ " " ++ (join_str xs)
-
-def split_para : string → list string
-| s := join_str <$> (split_l "" (split_lines s))
 
 def parse : string → option (list passport)
 | s     := monad.sequence $ parse_passport <$> (split_para s)
