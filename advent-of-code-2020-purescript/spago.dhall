@@ -4,10 +4,15 @@ You can edit this file as you like.
 -}
 { name = "my-project"
 , dependencies =
-  [ "console"
+  [ "bifunctors"
+  , "console"
   , "debug"
   , "effect"
+  , "errors"
+  , "foldable-traversable"
+  , "generics-rep"
   , "lists"
+  , "monad-loops"
   , "node-fs-aff"
   , "ordered-collections"
   , "parsing"

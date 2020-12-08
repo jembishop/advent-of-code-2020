@@ -11,22 +11,22 @@ import Data.Traversable (any, traverse)
 import Data.Tuple (Tuple(..), fst)
 import Effect (Effect)
 import Effect.Console (log)
-import Utils (justToEither, lineParse, parseNum, readInput, unsafeFromJust)
+import Utils (Error, justToEither, lineParse, numParse, readInput, unsafeFromJust)
 
 type BagRule
   = (Tuple String (Array (Tuple String Int)))
 
-parseColEntry :: String -> Either String (Tuple String Int)
+parseColEntry :: String -> Error (Tuple String Int)
 parseColEntry s = do
   let
     sp = split (Pattern " ") s
   cn <- justToEither "col entry num" $ index sp 0
-  cnp <- parseNum cn
+  cnp <- numParse cn
   cf <- justToEither "col entry fst half" $ index sp 1
   cs <- justToEither "col entry snd half" $ index sp 2
   pure $ Tuple (cf <> " " <> cs) cnp
 
-preParse :: String -> Either String BagRule
+preParse :: String -> Error BagRule
 preParse s = do
   let
     sp = split (Pattern " contain ") s
@@ -41,7 +41,7 @@ preParse s = do
   ce <- traverse parseColEntry sp2s
   pure $ Tuple (fh <> " " <> sh) ce
 
-parse :: String -> Either String (Array BagRule)
+parse :: String -> Error (Array BagRule)
 parse s = lineParse preParse s 
 
 canContain :: String -> String -> HashMap String BagRule -> Boolean
