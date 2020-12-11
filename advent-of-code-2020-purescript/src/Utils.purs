@@ -2,8 +2,11 @@ module Utils where
 
 import Prelude
 
-import Data.Array (uncons, (:), filter)
+import Data.Array (uncons, (:), filter, zipWith)
+import Data.Array.NonEmpty (NonEmptyArray, index, toArray)
+import Data.Array.NonEmpty as Na
 import Data.Bifunctor (lmap)
+import Data.BigInt as BigInt
 import Data.Either (Either(..))
 import Data.Int (fromString)
 import Data.Maybe (Maybe(..), fromJust)
@@ -52,3 +55,15 @@ numParse :: String -> Error Int
 numParse s = case fromString s of 
   Just x -> Right x
   Nothing -> Left $ "Error: " <> s <> " cannot be parsed to int"
+
+bigIntParse :: String -> Error BigInt.BigInt
+bigIntParse s = case BigInt.fromString s of 
+  Just x -> Right x
+  Nothing -> Left $ "Error: " <> s <> " cannot be parsed to bigint"
+
+uIdxN :: forall a . NonEmptyArray a -> Int -> a
+uIdxN a i = unsafeFromJust (index a i)
+
+diff :: forall a . Ring a => NonEmptyArray a -> Array a 
+diff arr =  zipWith (-) shifted (toArray arr) 
+    where {head:_, tail: shifted} = Na.uncons arr 

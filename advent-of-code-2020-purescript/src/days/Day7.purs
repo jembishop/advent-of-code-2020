@@ -3,7 +3,6 @@ module Day7 where
 import Prelude
 
 import Data.Array (elem, filter, index, length)
-import Data.Either (Either)
 import Data.Foldable (foldr)
 import Data.HashMap (HashMap, empty, insert, lookup)
 import Data.String (Pattern(..), split)
