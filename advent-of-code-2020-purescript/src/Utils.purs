@@ -14,6 +14,7 @@ import Data.String.Utils (lines)
 import Data.TraversableWithIndex (traverseWithIndex)
 import Data.Tuple (Tuple(..))
 import Effect (Effect)
+import Effect.Exception (throw)
 import Node.Encoding (Encoding(..))
 import Node.FS.Sync (readTextFile)
 import Partial.Unsafe (unsafePartial)
@@ -63,6 +64,11 @@ bigIntParse s = case BigInt.fromString s of
 
 uIdxN :: forall a . NonEmptyArray a -> Int -> a
 uIdxN a i = unsafeFromJust (index a i)
+
+errThrow :: forall a . Error a -> Effect a
+errThrow = case _ of
+  Left s -> throw s
+  Right x -> pure x
 
 diff :: forall a . Ring a => NonEmptyArray a -> Array a 
 diff arr =  zipWith (-) shifted (toArray arr) 
