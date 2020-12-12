@@ -3,7 +3,6 @@ module Day11 where
 import Debug.Trace
 import Prelude
 
-import Control.Error.Util (bool)
 import Control.Monad.Rec.Loops (iterateUntil)
 import Control.Monad.ST (ST, for)
 import Control.Monad.ST.Ref (read)
