@@ -4,7 +4,9 @@ You can edit this file as you like.
 -}
 { name = "my-project"
 , dependencies =
-  [ "bifunctors"
+  [ "array-views"
+  , "bifunctors"
+  , "bigints"
   , "console"
   , "debug"
   , "effect"
