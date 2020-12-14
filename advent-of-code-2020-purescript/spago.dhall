@@ -14,6 +14,7 @@ You can edit this file as you like.
   , "foldable-traversable"
   , "generics-rep"
   , "lists"
+  , "longs"
   , "monad-loops"
   , "node-fs-aff"
   , "ordered-collections"

@@ -7,7 +7,7 @@ import Data.Array.NonEmpty (NonEmptyArray, index, toArray)
 import Data.Array.NonEmpty as Na
 import Data.Bifunctor (lmap)
 import Data.BigInt as BigInt
-import Data.Either (Either(..))
+import Data.Either (Either(..), fromRight)
 import Data.Int (fromString)
 import Data.Maybe (Maybe(..), fromJust)
 import Data.String.Utils (lines)
@@ -42,6 +42,9 @@ toPairs arr = case arr of
 
 unsafeFromJust :: forall a. Maybe a -> a
 unsafeFromJust = unsafePartial fromJust
+
+unsafeFromRight :: forall a. Error a -> a
+unsafeFromRight = unsafePartial fromRight
 
 readFile :: String -> Effect String
 readFile s = readTextFile UTF8 $ s
