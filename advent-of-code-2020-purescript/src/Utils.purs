@@ -58,7 +58,7 @@ readLines s = filter (_ /= "") (lines s)
 numParse :: String -> Error Int
 numParse s = case fromString s of 
   Just x -> Right x
-  Nothing -> Left $ "Error: " <> s <> " cannot be parsed to int"
+  Nothing -> Left $ "Error: <" <> s <> "> cannot be parsed to int"
 
 bigIntParse :: String -> Error BigInt.BigInt
 bigIntParse s = case BigInt.fromString s of 
