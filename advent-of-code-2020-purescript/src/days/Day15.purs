@@ -51,8 +51,8 @@ step info tn = {spoken: insert info.lastSpoken (tn - 1) info.spoken, lastSpoken:
             Nothing -> 0
             Just i -> tn - i - 1
 
-        arrg2 = unsafePerformEffect 
-            (log $ "TURN NUMBER  " <> show tn <> " new " <> show new)
+        -- arrg2 = unsafePerformEffect 
+        --     (log $ "TURN NUMBER  " <> show tn <> " new " <> show new)
         -- arrg3 = unsafePerformEffect 
         --     (log $ show $ sort $ toArrayBy (\x -> \y -> (Tuple x y)) info.spoken)
         -- arrg3 = unsafePerformEffect (log $ show info.spoken)
