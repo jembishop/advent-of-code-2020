@@ -19,6 +19,7 @@ You can edit this file as you like.
   , "node-fs-aff"
   , "ordered-collections"
   , "parsing"
+  , "parsing-repetition"
   , "psci-support"
   , "strings"
   , "stringutils"

@@ -68,9 +68,9 @@ bigIntParse s = case BigInt.fromString s of
 uIdxN :: forall a . NonEmptyArray a -> Int -> a
 uIdxN a i = unsafeFromJust (index a i)
 
-errThrow :: forall a . Error a -> Effect a
+errThrow :: forall a . forall b . Show a => Either a b -> Effect b
 errThrow = case _ of
-  Left s -> throw s
+  Left s -> throw (show s)
   Right x -> pure x
 
 diff :: forall a . Ring a => NonEmptyArray a -> Array a 
