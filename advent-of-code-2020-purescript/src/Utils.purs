@@ -26,9 +26,9 @@ justToEither s ma = case ma of
   (Just r) -> Right r
   Nothing -> Left $ "Error " <> s
 
-lineParse ::forall a. (String -> Error a) -> String -> Error (Array a)
+lineParse :: forall a. forall b . Show a => (String -> Either a b) -> String -> Error (Array b)
 lineParse parser str = traverseWithIndex 
-  (\i s -> lmap (\msg -> "Line " <> (show (i+1)) <> ": " <> msg) (parser s)) 
+  (\i s -> lmap (\msg -> "Line " <> show (i+1) <> ": " <> show msg) (parser s)) 
   (readLines str)
 
 toPairs :: forall a. Array a -> Maybe (Array (Tuple a a))
